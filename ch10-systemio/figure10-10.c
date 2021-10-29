@@ -2,7 +2,7 @@
 
 int main(int argc, char **argv) {
     struct stat stat;
-    char *type, *readok;
+    char *type, *readok, *writeok;
 
     Stat(argv[1], &stat);
 
@@ -13,6 +13,9 @@ int main(int argc, char **argv) {
     if ((stat.st_mode & S_IRUSR)) readok = "yes";
     else readok = "no";
 
-    printf("type: %s, read: %s\n", type, readok);
+    if ((stat.st_mode & S_IWUSR)) writeok = "yes";
+    else writeok = "no";
+
+    printf("type: %s, read: %s, write: %s\n", type, readok, writeok);
     exit(0);
 }
